@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 16px;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #007acc;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005f99;
+    }
+    #msg {
+      margin-top: 10px;
+      color: #a00;
+      font-size: 14px;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter Access Code</h2>
+    <input id="pw" type="password" placeholder="Password" />
+    <button id="go">Enter</button>
+    <div id="msg"></div>
+  </div>
+
+  <script>
+    (function(){
+      const CORRECT = "WBDAD@123"; // password
+      const TARGET = "https://experience.arcgis.com/experience/724c6a94fa62452ba3ea9ae811eebdb6"; // redirect URL
+      const pw = document.getElementById('pw');
+      const btn = document.getElementById('go');
+      const msg = document.getElementById('msg');
+
+      function gotoTarget(){
+        window.location.href = TARGET;
+      }
+
+      btn.addEventListener('click', function(){
+        if (pw.value === CORRECT) {
+          gotoTarget();
+        } else {
+          msg.textContent = "Incorrect password. Try again.";
+          pw.value = "";
+          pw.focus();
+        }
+      });
+
+      pw.addEventListener('keyup', function(e){ if (e.key === 'Enter') btn.click(); });
+    })();
+  </script>
+</body>
+</html>
